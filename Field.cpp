@@ -53,6 +53,8 @@ void Field::setHeight(int height)
 
 void Field::onCellOpened(Cell *cell)
 {
+
+
     if (!m_firstCell) {
         m_firstCell = cell;
     } else if (!m_secondCell) {
@@ -60,7 +62,13 @@ void Field::onCellOpened(Cell *cell)
     }
     else if(m_firstCell && m_secondCell)
     {
-        closeCells();
+        if (m_firstCell->key()!=m_secondCell->key()) {
+            closeCells();
+        } else {
+            m_firstCell = nullptr;
+            m_secondCell = nullptr;
+        }
+
         m_firstCell = cell;
 
     }
