@@ -5,7 +5,9 @@
 Field::Field(QObject *parent) :
     QObject(parent),
     m_width(10),
-    m_height(10)
+    m_height(10),
+    m_firstCell(nullptr),
+    m_secondCell(nullptr)
 {
     applySize();
 }
@@ -49,8 +51,36 @@ void Field::setHeight(int height)
     emit heightChanged(height);
 }
 
+void Field::onCellOpened(Cell *cell)
+{
+    if (!m_firstCell) {
+        m_firstCell = cell;
+    } else if (!m_secondCell) {
+        m_secondCell = cell;
+    }
+    else if(m_firstCell && m_secondCell)
+    {
+        closeCells();
+        m_firstCell = cell;
+
+    }
+}
+
+
 void Field::closeCells()
 {
+
+    /*if (m_firstCell){
+        m_firstCell = nullptr;
+    }*/
+    if (m_firstCell && m_secondCell){
+        m_firstCell->close();
+        m_firstCell = nullptr;
+        m_secondCell->close();
+        m_secondCell = nullptr;
+
+
+    }
 
 }
 

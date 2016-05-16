@@ -37,7 +37,7 @@ Rectangle {
 
             Behavior on angle {
                 NumberAnimation {
-                    duration: 1000
+                    duration: 100
                 }
             }
         }
@@ -46,5 +46,5 @@ Rectangle {
     MouseArea {
         anchors.fill:parent
         onClicked: cell.open()
-    }
+        }
 }
